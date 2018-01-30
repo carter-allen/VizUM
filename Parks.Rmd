@@ -13,17 +13,45 @@ knitr::opts_chunk$set(echo = TRUE,message=FALSE, warning=FALSE)
 
 Data comes from [Miami-Dade County](https://opendata.miamidade.gov/Infrastructure/Parks-Facities/wjhr-nx6u) open data page. 
 
+Load data and format the `Location 1` column to be split into `lat` and `lon`.
 ```{r}
 library(tidyverse)
-parks <- read_csv("parks.csv")
+parks <- read_csv("https://raw.githubusercontent.com/carter-allen/VizUM/master/parks.csv") %>%
+  mutate(loc = (str_replace_all(`Location 1`,"\\(|\\)| ","")))
 ```
 
+Separate `loc` into `lat` and `lon` using the comma as the delimiter and make sure they are in numeric form. 
 ```{r}
 library(magrittr)
 parks %<>%
-  mutate(lat = str_split(str_replace_all(`Location 1`,
-                                         "\\(|\\)| ",""),",")[[1]][1],
-         lon = str_split(str_replace_all(`Location 1`,
-                                         "\\(|\\)| ",""),",")[[1]][2])
+  separate(loc,c("lat","lon"),",") %>%
+  mutate(lat = as.numeric(lat),
+         lon = as.numeric(lon))
+```
+
+Plot the park locations on a map of the Miami area. 
+```{r}
+library(leaflet)
+leaflet(data = parks) %>%
+  addTiles() %>%
+  addMarkers(~lon,~lat)
+```
+
+It looks like there is one location that was incorrectly specified (it is in Africa!). The point was entered as (0,0). We can ignore this point by filtering to make sure both `lat` and `lon` are not 0.
+
+```{r}
+parks %<>%
+  filter(lat != 0 & lon != 0)
+```
+
+```{r}
+library(htmltools)
+leaflet(data = parks) %>%
+  addTiles() %>%
+  addCircleMarkers(~lon,~lat,
+                   label = ~htmlEscape(name),
+                   radius = 6,
+                   stroke = FALSE,
+                   fillOpacity = 0.5)
 ```
 

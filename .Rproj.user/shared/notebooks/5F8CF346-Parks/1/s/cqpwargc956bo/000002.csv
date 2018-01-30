@@ -1,6 +1,0 @@
-"0","library(magrittr)"
-"0","parks %<>%"
-"0","  mutate(lat = str_split(str_replace_all(`Location 1`,"
-"0","                                         ""\\(|\\)| "",""""),"","")[[1]][1],"
-"0","         lon = str_split(str_replace_all(`Location 1`,"
-"0","                                         ""\\(|\\)| "",""""),"","")[[1]][2])"

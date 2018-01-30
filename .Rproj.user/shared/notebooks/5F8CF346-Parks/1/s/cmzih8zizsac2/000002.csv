@@ -1,0 +1,3 @@
+"0","library(tidyverse)"
+"0","parks <- read_csv(""https://raw.githubusercontent.com/carter-allen/VizUM/master/parks.csv"") %>%"
+"0","  mutate(loc = (str_replace_all(`Location 1`,""\\(|\\)| "","""")))"

@@ -1,0 +1,5 @@
+"0","library(magrittr)"
+"0","parks %<>%"
+"0","  separate(loc,c(""lat"",""lon""),"","") %>%"
+"0","  mutate(lat = as.numeric(lat),"
+"0","         lon = as.numeric(lon))"
