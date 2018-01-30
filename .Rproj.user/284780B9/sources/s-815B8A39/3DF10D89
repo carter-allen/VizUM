@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1517336458564.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1530610682",
+    "id" : "3DF10D89",
+    "lastKnownWriteTime" : 1517337346,
+    "last_content_update" : 1517337363537,
+    "path" : "~/Documents/VizUM/Parks.Rmd",
+    "project_path" : "Parks.Rmd",
+    "properties" : {
+        "cursorPosition" : "26,41",
+        "last_setup_crc32" : "815B8A39968294ff",
+        "scrollLine" : "7",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

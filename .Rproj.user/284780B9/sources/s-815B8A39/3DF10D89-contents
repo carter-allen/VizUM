@@ -1,0 +1,29 @@
+---
+title: "VizUM Parks Data"
+author: "Carter Allen"
+date: "1/30/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE, warning=FALSE)
+```
+
+## Intro
+
+Data comes from [Miami-Dade County](https://opendata.miamidade.gov/Infrastructure/Parks-Facities/wjhr-nx6u) open data page. 
+
+```{r}
+library(tidyverse)
+parks <- read_csv("parks.csv")
+```
+
+```{r}
+library(magrittr)
+parks %<>%
+  mutate(lat = str_split(str_replace_all(`Location 1`,
+                                         "\\(|\\)| ",""),",")[[1]][1],
+         lon = str_split(str_replace_all(`Location 1`,
+                                         "\\(|\\)| ",""),",")[[1]][2])
+```
+

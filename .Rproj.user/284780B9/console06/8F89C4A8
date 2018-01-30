@@ -1,0 +1,31 @@
+]0;~/Documents/VizUM[?1034hCarters-MacBook-Pro:VizUM carter$ [KCarters-MacBook-Pro:VizUM carter$ echo "# VizUM" >> README.md
+]0;~/Documents/VizUMCarters-MacBook-Pro:VizUM carter$ git init
+Initialized empty Git repository in /Users/carter/Documents/VizUM/.git/
+]0;~/Documents/VizUMCarters-MacBook-Pro:VizUM carter$ git add README.md
+]0;~/Documents/VizUMCarters-MacBook-Pro:VizUM carter$ git commit -m "first commit"
+[master (root-commit) d32428c] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+]0;~/Documents/VizUMCarters-MacBook-Pro:VizUM carter$ git remote add origin https://github.com/cart er-allen/VizUM.git
+]0;~/Documents/VizUMCarters-MacBook-Pro:VizUM carter$ git push -u origin master
+Counting objects: 3, done.
+Writing objects:  33% (1/3)   Writing objects:  66% (2/3)   Writing objects: 100% (3/3)   Writing objects: 100% (3/3), 219 bytes | 219.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/carter-allen/VizUM.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+]0;~/Documents/VizUMCarters-MacBook-Pro:VizUM carter$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31m.Rproj.user/[m
+	[31mParks.Rmd[m
+	[31mParks.html[m
+	[31mVizUM.Rproj[m
+	[31mparks.csv[m
+
+nothing added to commit but untracked files present (use "git add" to track)
+]0;~/Documents/VizUMCarters-MacBook-Pro:VizUM carter$ git ass [K[K[Kdd -A
