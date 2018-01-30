@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1517339819570.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "7C645838",
+    "lastKnownWriteTime" : 1517340557,
+    "last_content_update" : 1517340557515,
+    "path" : "~/Documents/VizUM/Miami_Parks/app.R",
+    "project_path" : "Miami_Parks/app.R",
+    "properties" : {
+        "cursorPosition" : "17,15",
+        "scrollLine" : "4",
+        "source_window_id" : ""
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

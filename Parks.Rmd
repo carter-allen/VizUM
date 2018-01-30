@@ -16,7 +16,7 @@ Data comes from [Miami-Dade County](https://opendata.miamidade.gov/Infrastructur
 Load data and format the `Location 1` column to be split into `lat` and `lon`.
 ```{r}
 library(tidyverse)
-parks <- read_csv("https://raw.githubusercontent.com/carter-allen/VizUM/master/parks.csv") %>%
+parks <- read_csv("parks.csv") %>%
   mutate(loc = (str_replace_all(`Location 1`,"\\(|\\)| ","")))
 ```
 
@@ -44,6 +44,7 @@ parks %<>%
   filter(lat != 0 & lon != 0)
 ```
 
+The map has a label that gives the name of the park the mouse it hovering over. 
 ```{r}
 library(htmltools)
 leaflet(data = parks) %>%
@@ -51,6 +52,60 @@ leaflet(data = parks) %>%
   addCircleMarkers(~lon,~lat,
                    label = ~htmlEscape(name),
                    radius = 6,
+                   stroke = FALSE,
+                   fillOpacity = 0.5)
+```
+
+Would like to give points a size that is based on their acreage given in the `TOTACRE` column. Define a function that can categorize acreages. 
+
+```{r}
+categorize_size <- function(a)
+{
+  if(0 <= a & a <= 1.1)
+  {
+    return("Small Park")
+  }
+  else if(1.1 < a & a <= 5)
+  {
+    return("Medium Park")
+  }
+  else if(5 < a & a <= 12.8825)
+  {
+    return("Large Park")
+  }
+  else
+  {
+    return("Very Large Park")
+  }
+}
+```
+
+```{r}
+categorize_sizes <- function(a_vec)
+{
+  b_vec = as.character(a_vec)
+  l = length(a_vec)
+  for(i in 1:l)
+  {
+    b_vec[i] = categorize_size(a_vec[i])
+  }
+  return(b_vec)
+}
+```
+
+```{r}
+parks %<>%
+  mutate(park_size = categorize_sizes(parks$TOTACRE))
+```
+
+```{r}
+leaflet(data = parks) %>%
+  addTiles() %>%
+  addCircleMarkers(~lon,~lat,
+                   label = ~htmlEscape(name),
+                   radius = ~ifelse(park_size == "Small Park",3,
+                                   ifelse(park_size == "Medium Park",6,
+                                          ifelse(park_size == "Large Park",9,12))),
                    stroke = FALSE,
                    fillOpacity = 0.5)
 ```
