@@ -1,0 +1,153 @@
+#
+# This is a Shiny web application. You can run the application by clicking
+# the 'Run App' button above.
+#
+# Find out more about building applications with Shiny here:
+#
+#    http://shiny.rstudio.com/
+#
+
+# packages
+
+library(ggplot2)
+library(tibble)
+library(shiny)
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+   
+   # Application title
+   titlePanel("Beta Binomial Distribution"),
+   
+   # Sidebar with a slider input for number of bins 
+   sidebarLayout(
+      sidebarPanel(
+        numericInput("x",
+                     "x observed",
+                     min = 0,
+                     max = NA,
+                     value = 10),
+         numericInput("n",
+                      "n",
+                      min = 0,
+                      max = NA,
+                      value = 10),
+         numericInput("alpha",
+                      "alpha",
+                      min = 0,
+                      max = NA,
+                      value = 10),
+         numericInput("beta",
+                      "beta",
+                      min = 0,
+                      max = NA,
+                      value = 10)
+      ),
+      
+      # Show a plot of the generated distribution
+      mainPanel(
+         plotOutput("distPlot1"),
+         plotOutput("distPlot2"),
+         plotOutput("distPlot3"),
+         plotOutput("distPlot4")
+      )
+   )
+)
+
+
+
+# Useful functions
+
+dbetbin <- function(x,n,alpha,beta)
+{
+  # Check for valid parameters
+  if(n < 0){
+    stop("n cannot be less than 0")
+  } 
+  
+  if(!all(x <= n)){
+    stop("x cannot be greater than n")
+  } 
+  
+  if(alpha < 0){
+    stop("alpha cannot be less than 0")
+  } 
+  
+  if(beta < 0){
+    stop("beta cannot be less than 0")
+  } 
+  
+  # Calculate p(x) according to pmf
+  p.x = choose(n,x)*beta(x+alpha,beta+n-x)*(1/beta(alpha,beta))
+  return(p.x)
+}
+
+pbetbin <- function(x,n,alpha,beta)
+{
+  # dbinbet already checks for valid parameters
+  # define support [0,x]
+  xs = seq(0,x,by = 1)
+  return(sum(dbetbinom(xs,n,alpha,beta)))
+}
+
+dbb_plot <- function(n,alpha,beta,plot_title = "Beta Binomial mass function")
+{
+  xs = seq(0,n,by = 1) # support 
+  p.x = dbetbin(xs,n,alpha,beta) # p(x)
+  bbs = as_tibble(cbind(xs,p.x)) # combine for ggplot
+  
+  ggplot(data = bbs, aes(x = xs, y = p.x)) + 
+    geom_col() +
+    scale_x_discrete(limits = xs) + 
+    ggtitle(plot_title) +
+    labs(subtitle = paste("Parameters",n,",",alpha,",",beta))
+}
+
+dbeta_plot <- function(alpha,beta,by=0.0025,plot_title = "Beta density function")
+{
+  thetas = seq(0,1,by = by)
+  p.theta = dbeta(thetas,alpha,beta)
+  bets = as_tibble(cbind(thetas,p.theta))
+  
+  ggplot(data = bets, aes(x = thetas,y = p.theta)) + 
+    geom_point() +
+    ggtitle(plot_title) +
+    labs(subtitle = paste("Parameters",alpha,"and",beta))
+}
+
+dbinom_plot <- function(n,p,plot_title = "Binomial Plot")
+{
+  xs = seq(0,n,by = 1)
+  p.x.binom = dbinom(xs,n,p)
+  binoms = as_tibble(cbind(xs,p.x.binom))
+  
+  ggplot(data = binoms,aes(x = xs,y = p.x.binom)) + 
+    geom_col() + 
+    scale_x_discrete(limits = xs) 
+}
+
+# Define server logic required to draw plots
+server <- function(input, output) {
+  
+  
+   output$distPlot1 <- renderPlot({
+       dbeta_plot(input$alpha, input$beta,plot_title = "Beta prior for theta")
+   })
+   
+   
+   output$distPlot2 <- renderPlot({
+     dbb_plot(input$n,input$alpha, input$beta,plot_title = "Beta-binomial prior predictive for X")
+   })
+   
+   output$distPlot3 <- renderPlot({
+     dbeta_plot(input$alpha + input$x, input$beta + input$n - input$x,plot_title = "Beta posterior for theta given X")  
+   })
+   
+   output$distPlot4 <- renderPlot({
+     dbb_plot(input$n,input$alpha + input$x, input$beta + input$n - input$x, plot_title = "Beta-binomial posterior predictive for X* given X")
+   })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+

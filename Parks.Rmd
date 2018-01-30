@@ -98,15 +98,34 @@ parks %<>%
   mutate(park_size = categorize_sizes(parks$TOTACRE))
 ```
 
+Mapping parks with 4 distinct size categories.
+
 ```{r}
 leaflet(data = parks) %>%
   addTiles() %>%
   addCircleMarkers(~lon,~lat,
-                   label = ~htmlEscape(name),
+                   label = ~htmlEscape(paste(name,": A",TYPE,CLASS)),
                    radius = ~ifelse(park_size == "Small Park",3,
                                    ifelse(park_size == "Medium Park",6,
                                           ifelse(park_size == "Large Park",9,12))),
                    stroke = FALSE,
-                   fillOpacity = 0.5)
+                   fillOpacity = 0.35)
+```
+
+```{r}
+pal <- colorFactor(c("red","green"),c("No","Yes"))
+```
+
+```{r}
+leaflet(data = parks) %>%
+  addTiles() %>%
+  addCircleMarkers(~lon,~lat,
+                   label = ~htmlEscape(paste(name,": A",TYPE,CLASS)),
+                   radius = ~ifelse(park_size == "Small Park",3,
+                                   ifelse(park_size == "Medium Park",6,
+                                          ifelse(park_size == "Large Park",9,12))),
+                   stroke = FALSE,
+                   fillOpacity = 0.35,
+                   color = ~pal(BEACH))
 ```
 
