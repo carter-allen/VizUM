@@ -1,4 +1,6 @@
-# VizUM
+# VizUM Project Materials
+## Public Parks in Miami-Dade
+## Carter Allen
 
 ### Data
  
