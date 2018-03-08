@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  8 MAR 2018 09:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  8 MAR 2018 09:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -288,11 +288,11 @@ Here is how much of TeX's memory you used:
  8796 multiletter control sequences out of 15000+600000
  5497 words of font info for 20 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,6n,32p,1687b,320s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,6n,32p,1685b,320s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></
 usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on idea_checkpoint.pdf (1 page, 39411 bytes).
+Output written on idea_checkpoint.pdf (1 page, 39362 bytes).
 PDF statistics:
  29 PDF objects out of 1000 (max. 8388607)
  22 compressed objects within 1 object stream
