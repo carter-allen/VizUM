@@ -1,7 +1,3 @@
-# VizUM Project Materials
-## Public Parks in Miami-Dade
-## Carter Allen
-
 ### Data
  
 [Miami-Dade parks](https://opendata.miamidade.gov/Infrastructure/Parks-Facities/wjhr-nx6u)
