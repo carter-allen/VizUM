@@ -1,0 +1,12 @@
+name: Miami_Parks
+title: Miami_Parks
+username:
+account: carter-allen
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 295793
+bundleId: 1259198
+url: https://carter-allen.shinyapps.io/Miami_Parks/
+when: 1520517908.21126
+asMultiple: FALSE
+asStatic: FALSE

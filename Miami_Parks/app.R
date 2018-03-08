@@ -55,7 +55,7 @@ ui <- bootstrapPage(
                 "Soccer" = "SOCCER",
                 "Stadium" = "STADIUM",
                 "Swimming" = "SWIMMING",
-                "Tennis" = "TENNIC",
+                "Tennis" = "TENNIS",
                 "Track (400)" = "TRACK400",
                 "Trail" = "TRAIL",
                 "Volleyball" = "VOLLEYBALL",
@@ -78,7 +78,7 @@ server <- function(input, output, session) {
          addCircleMarkers(~lon,~lat,
                           popup = ~paste(sep = "<br/>",name,ADDRESS,PHONE,
                                          paste(sep = "","<b><a href=\'",PARKURL,"\'>Website</a></b>")),
-                          label = ~htmlEscape(name),
+                          label = ~htmlEscape(paste(name,":",TYPE,CLASS)),
                           radius = ~ifelse(park_size == "Small Park",3,
                                            ifelse(park_size == "Medium Park",6,
                                                   ifelse(park_size == "Large Park",9,12))),
@@ -87,11 +87,13 @@ server <- function(input, output, session) {
      }
      else{
        attribute <- select(parks_tdy,toupper(input$att))
-       parks <- cbind(parks,attribute)
+       parks <- cbind(parks_tdy,attribute)
        parks_a <- parks[attribute == "Yes",]
        leaflet(data = parks_a) %>%
          addTiles() %>%
          addCircleMarkers(~lon,~lat,
+                          popup = ~paste(sep = "<br/>",name,ADDRESS,PHONE,
+                                         paste(sep = "","<b><a href=\'",PARKURL,"\'>Website</a></b>")),
                           label = ~htmlEscape(paste(name,":",TYPE,CLASS)),
                           radius = ~ifelse(park_size == "Small Park",3,
                                            ifelse(park_size == "Medium Park",6,

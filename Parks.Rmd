@@ -1,5 +1,5 @@
 ---
-title: "VizUM Parks Data"
+title: "VizUM Miami Parks Data: A Visual Essay"
 author: "Carter Allen"
 date: "1/30/2018"
 output: html_document
